@@ -23,7 +23,10 @@ impl Specifier for PeerCtl {
             None => panic!("PeerCtl: no URI in env"),
         };
 
-        let rspec = format!("{}:{}", self.0, rargs);
+        let rspec = match self.0.len() {
+            0 => rargs.to_string(),
+            _ => format!("{}:{}", self.0, rargs),
+        };
 
         spec(&rspec).unwrap().construct(cp.clone())
     }
@@ -40,12 +43,12 @@ specifier_class!(
     help = r#"
 Connect to specified left-peer-specified peer. Argument is a overridable specifier
 
-Example: connect to tcp host specified by websocket header X-Target-Host:X-Target-Port
+Example: connect to tcp host specified by the left peer's URI
 
-    websocat ws-l:0.0.0.0:8084 from-left:tcp 
+    websocat ws-l:0.0.0.0:8081 from-left:tcp 
 
 Example: dangerously allow left peer to specify peer protocol
 
-    websocat ws-l:0.0.0.0:8084 from-left:ws:
+    websocat ws-l:0.0.0.0:8081 from-left:
 "#
 );
