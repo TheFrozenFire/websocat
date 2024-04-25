@@ -213,6 +213,8 @@ pub mod transform_peer;
 #[cfg(feature = "wasm_plugins")]
 pub mod wasm_transform_peer;
 
+pub mod peer_ctl_peer;
+
 pub mod specparse;
 
 pub type PeerOverlay = Rc<dyn Fn(Peer, L2rUser) -> BoxedNewPeerFuture>;
