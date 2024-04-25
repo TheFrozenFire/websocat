@@ -1,12 +1,7 @@
-use futures::future::ok;
-use http_bytes::http::header::HeaderName;
-use std::borrow::BorrowMut;
-use std::cell::RefCell;
 use std::rc::Rc;
 
-use super::{ L2rUser, LeftSpecToRightSpec };
-use super::{box_up_err, peer_err_s, wouldblock, BoxedNewPeerFuture, BoxedNewPeerStream, Peer};
-use super::{multi, once, ConstructParams, Options, PeerConstructor, Specifier};
+use super::L2rUser;
+use super::{ConstructParams, PeerConstructor, Specifier};
 use super::spec;
 
 #[derive(Debug, Clone)]
