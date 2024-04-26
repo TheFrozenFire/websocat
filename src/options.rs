@@ -158,4 +158,6 @@ pub struct Options {
     pub lengthprefixed_skip_read_direction: bool,
     pub lengthprefixed_skip_write_direction: bool,
 
+    pub peer_ctl_query_param: Option<String>,
+    pub peer_ctl_header: Option<String>,
 }

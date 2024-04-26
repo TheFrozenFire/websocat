@@ -3,6 +3,7 @@ use std::rc::Rc;
 use super::L2rUser;
 use super::{ConstructParams, PeerConstructor, Specifier};
 use super::spec;
+use url::Url;
 
 #[derive(Debug, Clone)]
 pub struct PeerCtl (pub String);
@@ -13,9 +14,21 @@ impl Specifier for PeerCtl {
             _ => panic!("PeerCtl: unexpected L2rUser"),
         };
 
-        let rargs = match &env.uri {
-            Some(uri) => uri.trim_start_matches('/'),
-            None => panic!("PeerCtl: no URI in env"),
+        println!("{}", env.headers.iter().map(|(k, v)| format!("{}: {}", k, v)).collect::<Vec<String>>().join("\n"));
+
+        let rargs = match (&cp.program_options.peer_ctl_query_param, &cp.program_options.peer_ctl_header, &env.uri) {
+            (Some(query_param), None, _) => {
+                Url::parse(format!("https://example.com{}", &env.uri.as_ref().unwrap()).as_str())
+                    .unwrap()
+                    .query_pairs().find(|(k, _)| k == query_param)
+                    .unwrap_or_default().1.to_string()
+            },
+            (None, Some(header_name), _) => {
+                env.headers.iter().find(|(k, _)| k == header_name)
+                    .unwrap_or(&(String::new(), String::new())).1.to_string()
+            },
+            (None, None, Some(uri)) => uri.trim_start_matches('/').to_string(),
+            _ => panic!("PeerCtl: no peer_ctl_query_param in program_options"),
         };
 
         let rspec = match self.0.len() {

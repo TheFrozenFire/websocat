@@ -672,6 +672,14 @@ struct Opt {
     /// [A] Only affect one direction of the `lengthprefixed:` overlay, bypass tranformation for the other one.
     #[structopt(long = "--lengthprefixed-skip-write-direction")]
     pub lengthprefixed_skip_write_direction: bool,
+
+    /// [A] 
+    #[structopt(long = "--peer-ctl-query-param")]
+    pub peer_ctl_query_param: Option<String>,
+
+    /// [A]
+    #[structopt(long = "--peer-ctl-header")]
+    pub peer_ctl_header: Option<String>,
 }
 
 // TODO: make it byte-oriented/OsStr?
@@ -961,6 +969,8 @@ fn run() -> Result<()> {
             lengthprefixed_little_endian
             lengthprefixed_skip_read_direction
             lengthprefixed_skip_write_direction
+            peer_ctl_query_param
+            peer_ctl_header
         );
         #[cfg(feature = "ssl")]
         {
