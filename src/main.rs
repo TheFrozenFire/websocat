@@ -673,11 +673,11 @@ struct Opt {
     #[structopt(long = "--lengthprefixed-skip-write-direction")]
     pub lengthprefixed_skip_write_direction: bool,
 
-    /// [A] 
+    /// [A] Specify the peer query parameter for `peer-ctl:` overlay
     #[structopt(long = "--peer-ctl-query-param")]
     pub peer_ctl_query_param: Option<String>,
 
-    /// [A]
+    /// [A] Specify the peer header for `peer-ctl:` overlay
     #[structopt(long = "--peer-ctl-header")]
     pub peer_ctl_header: Option<String>,
 }

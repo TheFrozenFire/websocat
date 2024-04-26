@@ -90,10 +90,28 @@ Connect to specified left-peer-specified peer. Argument is a overridable specifi
 
 Example: connect to tcp host specified by the left peer's URI
 
-    websocat ws-l:0.0.0.0:8081 from-left:tcp 
+    websocat ws-l:0.0.0.0:8081 from-left:tcp
+    websocat ws://127.0.0.1:8081/example.com:80
 
-Example: dangerously allow left peer to specify peer protocol
+Example: connect to tcp host specified by the left peer's URI, with a default port
+
+    websocat ws-l:0.0.0.0:8081 from-left:tcp::443
+    websocat ws://127.0.0.1:8081/example.com
+
+Example: connect to tcp host specified by the left peer's token query parameter
+
+    websocat ws-l:0.0.0.0:8081 from-left:tcp::443 --peer-ctl-query-param=token
+    websocat ws://127.0.0.1:8081/?token=example.com
+
+Example: connect to tcp host specified by the left peer's Host header
+
+    websocat ws-l:0.0.0.0:8081 from-left:tcp::443 --peer-ctl-header=Host
+    websocat ws://127.0.0.1:8081/ -H "Host: example.com"
+
+Dangerous Example: allow left peer to specify whole peer specifier
 
     websocat ws-l:0.0.0.0:8081 from-left:
+    websocat ws://127.0.0.1:8081/cmd:rm%20-rf%20/
+
 "#
 );
