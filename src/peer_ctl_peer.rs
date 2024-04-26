@@ -86,7 +86,7 @@ specifier_class!(
     StreamOriented,
     SingleConnect,
     help = r#"
-Connect to specified left-peer-specified peer. Argument is a overridable specifier
+Connect to specified left-peer-specified peer. Argument is an overridable specifier
 
 Example: connect to tcp host specified by the left peer's URI
 
