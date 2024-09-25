@@ -118,5 +118,7 @@ macro_rules! list_of_all_specifier_classes {
         $your_macro!($crate::trivial_peer::DropOnBackpressureClass);
 
         $your_macro!($crate::reconnect_peer::WaitForDataClass);
+
+        $your_macro!($crate::peer_ctl_peer::PeerCtlClass);
     };
 }
